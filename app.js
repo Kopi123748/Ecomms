@@ -56,7 +56,9 @@ app.use((req, res, next) => {
 app.use(flash());
 
 // Define routes
-app.get('/', (req, res) => res.render('indexcustomer', { currentPage: 'home' }));
+app.get("/", (req, res) => {
+  res.render("indexcustomer", { currentPage: "home" });
+});
 // app.get('/products', productController.getProducts);
 // app.get('/product/:id', productController.getProduct);
 // app.get('/addProduct', productController.addProductForm);

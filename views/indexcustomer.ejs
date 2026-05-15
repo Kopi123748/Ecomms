@@ -1,81 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Home - Product Management</title>
-    <style>
-        /* Custom style to reduce the height of the carousel */
-        .carousel-item img {
-            height: 300px; /* Adjust this value as needed */
-            object-fit: cover; /* Maintain aspect ratio while covering the area */
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Home - Product Management</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #faf7f2;
+    }
+
+    .navbar-custom {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      padding: 0 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1000;
+      color: white;
+      background: transparent;
+      transition: 0.3s ease;
+    }
+
+    .navbar-custom.scrolled {
+      background: #faf7f2;
+      color: #222;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 45px;
+      height: 45px;
+      background: #d60000;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 45px;
+    }
+
+    .nav-links a {
+      color: inherit;
+      text-decoration: none;
+      font-size: 22px;
+    }
+
+    .nav-extra {
+      display: none;
+      height: 100%;
+      align-items: center;
+    }
+
+    .navbar-custom.scrolled .nav-extra {
+      display: flex;
+    }
+
+    .nav-box {
+      height: 100%;
+      width: 260px;
+      padding: 18px 30px;
+      border-left: 1px solid #e5ded5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .nav-box small {
+      font-size: 15px;
+      letter-spacing: 4px;
+      color: #777;
+      font-weight: bold;
+    }
+
+    .nav-box span {
+      font-size: 22px;
+      margin-top: 6px;
+    }
+
+    .cart {
+      width: 65px;
+      height: 65px;
+      margin-left: 25px;
+      border: 1px solid #e5ded5;
+      background: transparent;
+      font-size: 24px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.8)),
+        url("/images/orangebanner.jpg") center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 120px 20px 40px;
+    }
+
+    .hero-subtitle {
+      color: #d89b22;
+      letter-spacing: 10px;
+      font-size: 17px;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 76px;
+      line-height: 1.05;
+      max-width: 1200px;
+    }
+
+    .hero-desc {
+      font-size: 24px;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 35px auto;
+    }
+
+    .order-btn {
+      background: #d60000;
+      color: white;
+      border: none;
+      padding: 20px 55px;
+      font-size: 24px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    footer {
+      background-color: white;
+      padding: 50px 0;
+      color: black;
+    }
+
+    footer .footer-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      text-align: left;
+    }
+
+    footer ul {
+      list-style: none;
+      padding: 0;
+      line-height: 1.8;
+    }
+
+    footer a {
+      color: darkblue;
+      text-decoration: none;
+    }
+
+    .payment-logo {
+      width: 50px;
+      margin-right: 10px;
+    }
+
+    @media (max-width: 1000px) {
+      .nav-extra {
+        display: none !important;
+      }
+
+      .nav-links {
+        gap: 20px;
+      }
+
+      .nav-links a {
+        font-size: 16px;
+      }
+
+      .navbar-custom {
+        padding: 0 20px;
+      }
+
+      .hero h1 {
+        font-size: 44px;
+      }
+
+      .hero-desc {
+        font-size: 18px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <%- include('partials/navbarcustomer.ejs') %>
 
+  <header id="navbar" class="navbar-custom">
+    <div class="logo">
+      <div class="logo-icon">炭</div>
+      SEAMLES
+    </div>
 
-    <div id="carouselExampleCaptions" class="carousel slide">
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/catalog">Shop⌄</a>
+      <a href="#">About⌄</a>
+      <a href="#">Help & Info⌄</a>
+    </nav>
 
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="/images/orangebanner.jpg" class="d-block w-100" alt="orangebanner">
-            <div class="carousel-caption d-none d-md-block">
-              <h5 style="color: black;">ENJOY UP TO 50% OFF SELECTED ITEMS</h5>
-              <p style="color: black; padding-bottom: 70px;">TERMS AND CONDITIONS APPLY</p>
-            </div>
-          </div>
+    <div class="nav-extra">
+      <div class="nav-box">
+        <small>DELIVERY METHOD</small>
+        <span>Select ›</span>
+      </div>
+
+      <div class="nav-box">
+        <small>DATE & TIME</small>
+        <span>Select ›</span>
+      </div>
+
+      <button class="cart">🛒</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="hero-subtitle">ENJOY UP TO 50% OFF SELECTED ITEMS</p>
+
+      <h1>
+        Welcome to SEAMLES<br>
+        Shop Your Favourite Products
+      </h1>
+
+      <p class="hero-desc">
+        Discover selected items, promotions and more from the comfort of your home.
+      </p>
+
+      <a href="/catalog" class="order-btn">Shop Now</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-container">
+      <div>
+        <h4>Customer Service</h4>
+        <ul>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Return Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+
+        <div style="margin-top: 20px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" class="payment-logo" alt="Visa">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" class="payment-logo" alt="MasterCard">
+          <img src="https://logos-world.net/wp-content/uploads/2020/07/PayPal-Logo-2007-700x394.png" class="payment-logo" alt="Paypal">
         </div>
-    </div>
+      </div>
 
-    <div class="container mt-5">
-    
-        <div class="d-flex justify-content-center mt-4">
-            <a href="/catalog" class="btn mx-2" style="background-color: black; color: white; ">SHOP NOW</a>        </div>
-    </div>
-
-
-    <!-- Footer Section -->
-<footer style="background-color: white; padding: 50px 0; text-align: center; color: black;">
-  <div class="container" style="display: flex; justify-content: space-around; flex-wrap: wrap; text-align: left;">
-    <!-- Customer Service Section -->
-    <div>
-      <h4>Customer Service</h4>
-      <ul style="list-style: none; padding: 0; line-height: 1.8;">
-        <li><a href="#" style="color: darkblue; text-decoration: none;">FAQs</a></li>
-        <li><a href="#" style="color: darkblue; text-decoration: none;">Privacy Policy</a></li>
-        <li><a href="#" style="color: darkblue; text-decoration: none;">Return Policy</a></li>
-        <li><a href="#" style="color: darkblue; text-decoration: none;">Terms of Service</a></li>
-      </ul>
-      <div style="margin-top: 20px;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" style="width: 50px; margin-right: 10px;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="MasterCard" style="width: 50px; margin-right: 10px;">
-        <img src="https://logos-world.net/wp-content/uploads/2020/07/PayPal-Logo-2007-700x394.png" alt="Paypal" style="width: 48px; margin-right: 10px;">
-        <img src="https://cdn.solace.com/wp-content/uploads/2019/01/NETS-Singapore-official-logo.png" alt="Nets" style="width: 48px; margin-right: 10px;">
-
-
+      <div>
+        <h4>Contact Us</h4>
+        <p>Email: <a href="mailto:23010000@myrp.edu.sg">23010000@myrp.edu.sg</a></p>
+        <p>Working Hours: Mon - Fri, 9.15 AM - 4:00 PM</p>
+        <p>Address: Republic Polytechnic</p>
+        <p>Company Name: SEAMLES</p>
       </div>
     </div>
+  </footer>
 
-    <!-- Contact Us Section -->
-    <div>
-      <h4>Contact Us</h4>
-      <p>Email: <a href="23010000@myrp.edu.sg" style="color: darkblue; text-decoration: none;">23010000@myrp.edu.sg</a></p>
-      <p>Working Hours: Mon - Fri, 9.15 AM - 4:00 PM</p>
-      <p>Address: Republic Polytechnic</p>
-      <p>Company Name: SEAMLES</p>
-      <div style="margin-top: 20px;">
-        <a href="#" target="_blank">
-        </a>
-      </div>
-    </div>
-  </div>
-</footer>
+  <script>
+    const navbar = document.getElementById("navbar");
 
+    window.addEventListener("scroll", function () {
+      if (window.scrollY > 80) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+  </script>
 
-  
 </body>
 </html>
