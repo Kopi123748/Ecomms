@@ -22,11 +22,11 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 110px;
-      padding: 0 50px;
+      height: 80px;
+      padding: 0 40px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
       z-index: 1000;
       color: white;
       background: transparent;
@@ -39,41 +39,36 @@
       box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     }
 
-    .logo {
-      font-size: 32px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-icon {
-      width: 45px;
-      height: 45px;
-      background: red;
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-    }
-
     .nav-links {
       display: flex;
-      gap: 50px;
+      align-items: center;
+      gap: 28px;
     }
 
     .nav-links a {
       text-decoration: none;
       color: inherit;
-      font-size: 24px;
+      font-size: 15px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .dropdown-arrow {
+      font-size: 11px;
+      line-height: 1;
+      display: inline-block;
+      transform: translateY(1px);
     }
 
     .nav-extra {
       display: none;
       height: 100%;
       align-items: center;
+      margin-left: 36px;
     }
 
     .navbar.scrolled .nav-extra {
@@ -82,8 +77,8 @@
 
     .nav-box {
       height: 100%;
-      width: 300px;
-      padding: 18px 36px;
+      width: 180px;
+      padding: 10px 18px;
       border-left: 1px solid #e5ded5;
       display: flex;
       flex-direction: column;
@@ -91,24 +86,24 @@
     }
 
     .nav-box small {
-      font-size: 16px;
-      letter-spacing: 4px;
+      font-size: 10px;
+      letter-spacing: 1.5px;
       color: #777;
       font-weight: bold;
     }
 
     .nav-box span {
-      font-size: 24px;
-      margin-top: 8px;
+      font-size: 14px;
+      margin-top: 5px;
     }
 
     .cart {
-      width: 70px;
-      height: 70px;
-      margin-left: 25px;
+      width: 45px;
+      height: 45px;
+      margin-left: 18px;
       border: 1px solid #e5ded5;
       background: transparent;
-      font-size: 26px;
+      font-size: 18px;
       border-radius: 6px;
       cursor: pointer;
     }
@@ -123,37 +118,37 @@
       justify-content: center;
       text-align: center;
       color: white;
-      padding: 120px 20px 40px;
+      padding: 100px 20px 40px;
     }
 
     .hero-subtitle {
       color: #d89b22;
-      letter-spacing: 12px;
-      font-size: 18px;
-      margin-bottom: 25px;
+      letter-spacing: 8px;
+      font-size: 13px;
+      margin-bottom: 20px;
     }
 
     .hero h1 {
       font-family: Georgia, serif;
       font-style: italic;
-      font-size: 82px;
-      line-height: 1.05;
-      max-width: 1300px;
+      font-size: 64px;
+      line-height: 1.08;
+      max-width: 1100px;
     }
 
     .hero-desc {
-      font-size: 25px;
+      font-size: 18px;
       line-height: 1.6;
-      max-width: 800px;
-      margin: 35px auto;
+      max-width: 720px;
+      margin: 28px auto;
     }
 
     .order-btn {
       background: #d60000;
       color: white;
       border: none;
-      padding: 22px 55px;
-      font-size: 24px;
+      padding: 15px 36px;
+      font-size: 16px;
       border-radius: 5px;
       cursor: pointer;
     }
@@ -162,24 +157,45 @@
       height: 900px;
       background: #faf7f2;
       padding: 80px;
-      font-size: 28px;
+      font-size: 22px;
+      color: #222;
     }
 
     @media (max-width: 1000px) {
+      .navbar {
+        height: 70px;
+        padding: 0 20px;
+        justify-content: center;
+      }
+
+      .nav-links {
+        gap: 18px;
+      }
+
+      .nav-links a {
+        font-size: 13px;
+        gap: 4px;
+      }
+
+      .dropdown-arrow {
+        font-size: 9px;
+      }
+
       .nav-extra {
         display: none !important;
       }
 
-      .nav-links {
-        gap: 20px;
-      }
-
       .hero h1 {
-        font-size: 48px;
+        font-size: 42px;
       }
 
-      .navbar {
-        padding: 0 25px;
+      .hero-desc {
+        font-size: 16px;
+      }
+
+      .hero-subtitle {
+        font-size: 11px;
+        letter-spacing: 5px;
       }
     }
   </style>
@@ -188,27 +204,22 @@
 <body>
 
   <header id="navbar" class="navbar">
-    <div class="logo">
-      <div class="logo-icon">Seamles</div>
-      Seamles
-    </div>
-
     <nav class="nav-links">
-      <a href="#">Shop⌄</a>
-      <a href="#">About⌄</a>
-      <a href="#">Happenings⌄</a>
-      <a href="#">Help & Info⌄</a>
+      <a href="#">Shop <span class="dropdown-arrow"></span></a>
+      <a href="#">About <span class="dropdown-arrow"></span></a>
+      <a href="#">Happenings <span class="dropdown-arrow"></span></a>
+      <a href="#">Help & Info <span class="dropdown-arrow"></span></a>
     </nav>
 
     <div class="nav-extra">
       <div class="nav-box">
         <small>DELIVERY METHOD</small>
-        <span>Select ›</span>
+        <span>Select›</span>
       </div>
 
       <div class="nav-box">
         <small>DATE & TIME</small>
-        <span>Select ›</span>
+        <span>Select›</span>
       </div>
 
       <button class="cart">🛒</button>
